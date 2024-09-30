@@ -40,6 +40,49 @@ with tab1:
     st.image(img_analyse_graphe_4)
     
 with tab2:
-    img_analyse_graphe_1 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_1.png"))
-    img_analyse_graphe_2 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_2.png"))
+    st.html("<h1><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h1>")
+    def drawBtn():
+        btn_load_images = st.button("Charger les échantillons",  type="primary" )
+        if btn_load_images:
+            load_images()
+            st.text("Les images ont été chargées !")
+        
+    #btn_load_images = st.button("Charger les échantillons",  type="primary" )
+    def load_images():
+        cats = {
+            '10' : 'Livres anciens / occasion',
+            '40' : 'Jeux vidéos anciens, équipement',
+            '50' : 'Accessoires & produits dérivés gaming',
+            '60' : 'Consoles de jeu',
+            '1140' : 'Figurines',
+            '1160' : 'Cartes de jeu',
+            '1180' : 'Figurines & Jeux de Société',
+            '1280' : 'Jeux & jouets pour enfants',
+            '1281' : 'Jeux de société',
+            '1300' : 'Modélisme',
+            '1301' : 'Vêtements bébé et jeux pour la maison',
+            '1302' : 'Jeux & jouets d\'extérieur pour enfants',
+            '1320' : 'Jouets & accessoires pour bébé',
+            '1560' : 'Meubles d\'intérieur',
+            '1920' : 'Linge de maison',
+            '1940' : 'Alimentation & vaisselle',
+            '2060' : 'Objets décoration maison',
+            '2220' : 'Equipement pour animaux',
+            '2280' : 'Journaux, revues, magazines anciens',
+            '2403' : 'Livres, BD, magazines anciens',
+            '2462' : 'Consoles, jeux et équipement occasion',
+            '2522' : 'Papeterie',
+            '2582' : 'Meubles d\'extérieur',
+            '2583' : 'Equipement pour piscine',
+            '2585' : 'Outillage intérieur / extérieur, tâches ménagères',
+            '2705' : 'Livres neufs',
+            '2905' : 'Jeux PC',
+        }
+        df = pd.DataFrame({'code': list(cats.keys()), 'catégorie': list(cats.values())})
+        for code in df['code']:
+            st.write("Catégorie : " + cats[code])
+            st.image(Image.open(os.path.join(os.getcwd(), "images", "code-" + str(code) + ".png")))
+        
+    drawBtn()        
+    
     

@@ -10,7 +10,7 @@ import os
 st.title("Jeu de données")
 
 # Configuration de la barre latérale
-tabs_title = ["🗃Jeu de données intial", "🗃Jeu de données cible"]
+tabs_title = ["🚀Jeu de données intial", "🚀Jeu de données cible"]
 tab1, tab2 = st.tabs(tabs_title)
 cur_dir = os.getcwd()
 st.write(cur_dir)
