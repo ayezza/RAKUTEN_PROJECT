@@ -3,7 +3,22 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import os
+
+
+def isFileExist(fileFullPath):
+    if fileFullPath is not None:
+        if os.path.isfile(fileFullPath):
+            if os.path.exists(fileFullPath):
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False
 
 
 st.title("Analyse exploratoire et preprossing")
@@ -39,15 +54,51 @@ with tab1:
             la plus dominante en terme de description comme les mot <span style='color: red'><strong>jeu, enfant, sac, piscine...</strong></span></p>")
     st.image(img_analyse_graphe_4)
     
+    
+    #   Load some graphs in live
+    st.html("<h1><span  style='color:orange'>Graphes de distribution</span></h1>")
+    def drawBtn_1():
+        btn_load_graphs = st.button("Charger les graphes",  type="primary" )
+        if btn_load_graphs:
+            load_graphs()
+            st.text("Les graphes ont été chargés !")
+    
+    def load_graphs():
+        pickles_apth = "./data/cleaned_data.pkl"
+        if isFileExist(pickles_apth):
+            print("Reading from pickle file from " + f"{pickles_apth} ...")
+            df = pd.read_pickle(f"{pickles_apth}")
+            sns.set_theme(rc={'figure.figsize': (10, 10)})
+            fig, ax = plt.subplots(nrows= 1, ncols= 1)
+            g1 = sns.histplot(x=df['desi_desc'].str.split().map(lambda x: len(x)), ax=ax, kde=True, bins=range(0, 400))
+            
+            g1.set_xlim(0,400)
+            g1.set_xlabel("Longueur du texte 'desi_desc'")
+            g1.set_ylabel("Nombre de 'desi_desc'")
+            g1.set_title("Distribution de la longueur de la variable 'desi_desc'")
+            g1.set_gid(True)
+            st.pyplot(g1.figure)
+            
+            df['desc_length'] = df['desi_desc'].apply(lambda x: len(str(x)))
+            g2 = sns.boxplot(data=df, y='desc_length', ax=ax, hue='prdtypecode', gap=1.5, palette='pastel')
+            g2.set_ylabel("Longueur du texte")
+            g2.set_title("Distribution de la longueur de la variable 'desi_desc'")
+            st.pyplot(g2.figure)
+
+        else:
+            st.html("Fichier PICKLE introuvable ici " + pickles_apth)
+
+    drawBtn_1()
+    
+    
 with tab2:
     st.html("<h1><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h1>")
-    def drawBtn():
+    def drawBtn_2():
         btn_load_images = st.button("Charger les échantillons",  type="primary" )
         if btn_load_images:
             load_images()
             st.text("Les images ont été chargées !")
         
-    #btn_load_images = st.button("Charger les échantillons",  type="primary" )
     def load_images():
         cats = {
             '10' : 'Livres anciens / occasion',
@@ -83,6 +134,6 @@ with tab2:
             st.write("Catégorie : " + cats[code])
             st.image(Image.open(os.path.join(os.getcwd(), "images", "code-" + str(code) + ".png")))
         
-    drawBtn()        
+    drawBtn_2()        
     
     

@@ -83,7 +83,7 @@ with tab2:
     
     st.html("<p>Les deux variables <strong>'designation'</strong> et <strong>'description'</strong> ont été concténées \
         dans une une unique variable <strong>'desi_desc'</strong>.\
-        Le reste des variable explicatives ont été préservées.</p>")
+        Le reste des variables explicatives ont été préservées.</p>")
    
     '''
     print("Reading from pickle file...")
