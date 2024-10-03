@@ -21,6 +21,41 @@ def isFileExist(fileFullPath):
         return False
 
 
+def get_codes_df():
+    cats = {
+            '10' : 'Livres anciens / occasion',
+            '40' : 'Jeux vidéos anciens, équipement',
+            '50' : 'Accessoires & produits dérivés gaming',
+            '60' : 'Consoles de jeu',
+            '1140' : 'Figurines',
+            '1160' : 'Cartes de jeu',
+            '1180' : 'Figurines & Jeux de Société',
+            '1280' : 'Jeux & jouets pour enfants',
+            '1281' : 'Jeux de société',
+            '1300' : 'Modélisme',
+            '1301' : 'Vêtements bébé et jeux pour la maison',
+            '1302' : 'Jeux & jouets d\'extérieur pour enfants',
+            '1320' : 'Jouets & accessoires pour bébé',
+            '1560' : 'Meubles d\'intérieur',
+            '1920' : 'Linge de maison',
+            '1940' : 'Alimentation & vaisselle',
+            '2060' : 'Objets décoration maison',
+            '2220' : 'Equipement pour animaux',
+            '2280' : 'Journaux, revues, magazines anciens',
+            '2403' : 'Livres, BD, magazines anciens',
+            '2462' : 'Consoles, jeux et équipement occasion',
+            '2522' : 'Papeterie',
+            '2582' : 'Meubles d\'extérieur',
+            '2583' : 'Equipement pour piscine',
+            '2585' : 'Outillage intérieur / extérieur, tâches ménagères',
+            '2705' : 'Livres neufs',
+            '2905' : 'Jeux PC',
+        }
+    df_codes = pd.DataFrame({'prdtypecode': list(cats.keys()), 'catégorie': list(cats.values())})
+    return df_codes
+    
+
+
 st.title("Analyse exploratoire et preprossing")
 
 
@@ -28,6 +63,8 @@ st.title("Analyse exploratoire et preprossing")
 tabs_title = ["🗃Partie texte", "🗃Partie images"]
 tab1, tab2 = st.tabs(tabs_title)
 
+
+# TAB partie texte
 with tab1:
     img_analyse_graphe_1 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_1.png"))
     img_analyse_graphe_2 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_2.png"))
@@ -68,7 +105,7 @@ with tab1:
         if isFileExist(pickles_apth):
             print("Reading from pickle file from " + f"{pickles_apth} ...")
             df = pd.read_pickle(f"{pickles_apth}")
-            sns.set_theme(rc={'figure.figsize': (10, 10)})
+            sns.set_theme(rc={'figure.figsize': (10, 7)})
             fig, ax = plt.subplots(nrows= 1, ncols= 1)
             g1 = sns.histplot(x=df['desi_desc'].str.split().map(lambda x: len(x)), ax=ax, kde=True, bins=range(0, 400))
             
@@ -84,13 +121,25 @@ with tab1:
             g2.set_ylabel("Longueur du texte")
             g2.set_title("Distribution de la longueur de la variable 'desi_desc'")
             st.pyplot(g2.figure)
+            
+            df_codes = get_codes_df()
+            df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
+            df['prdtypecode'] = df['prdtypecode'].astype(int)
+            df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
+            g3 =sns.barplot(data=df_with_cats, x='catégorie', y='prdtypecode', estimator="count", orient='v', errorbar=None, ax=ax, palette='Spectral')
+            g3.set_title("Distribution en nombre de produits par catégorie")
+            g3.set_xlabel('Catégories')
+            g3.set_ylabel('Nombre de produits')
+            ax.tick_params(axis='x', rotation=90)
+            st.pyplot(g3.figure)
 
         else:
             st.html("Fichier PICKLE introuvable ici " + pickles_apth)
 
     drawBtn_1()
     
-    
+
+# TAB partie images    
 with tab2:
     st.html("<h1><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h1>")
     def drawBtn_2():
@@ -100,40 +149,11 @@ with tab2:
             st.text("Les images ont été chargées !")
         
     def load_images():
-        cats = {
-            '10' : 'Livres anciens / occasion',
-            '40' : 'Jeux vidéos anciens, équipement',
-            '50' : 'Accessoires & produits dérivés gaming',
-            '60' : 'Consoles de jeu',
-            '1140' : 'Figurines',
-            '1160' : 'Cartes de jeu',
-            '1180' : 'Figurines & Jeux de Société',
-            '1280' : 'Jeux & jouets pour enfants',
-            '1281' : 'Jeux de société',
-            '1300' : 'Modélisme',
-            '1301' : 'Vêtements bébé et jeux pour la maison',
-            '1302' : 'Jeux & jouets d\'extérieur pour enfants',
-            '1320' : 'Jouets & accessoires pour bébé',
-            '1560' : 'Meubles d\'intérieur',
-            '1920' : 'Linge de maison',
-            '1940' : 'Alimentation & vaisselle',
-            '2060' : 'Objets décoration maison',
-            '2220' : 'Equipement pour animaux',
-            '2280' : 'Journaux, revues, magazines anciens',
-            '2403' : 'Livres, BD, magazines anciens',
-            '2462' : 'Consoles, jeux et équipement occasion',
-            '2522' : 'Papeterie',
-            '2582' : 'Meubles d\'extérieur',
-            '2583' : 'Equipement pour piscine',
-            '2585' : 'Outillage intérieur / extérieur, tâches ménagères',
-            '2705' : 'Livres neufs',
-            '2905' : 'Jeux PC',
-        }
-        df = pd.DataFrame({'code': list(cats.keys()), 'catégorie': list(cats.values())})
-        for code in df['code']:
-            st.write("Catégorie : " + cats[code])
+        df_codes = get_codes_df()
+        for code, cat in zip(df_codes['prdtypecode'], df_codes['catégorie']):
+            st.write("Catégorie : " + cat)
             st.image(Image.open(os.path.join(os.getcwd(), "images", "code-" + str(code) + ".png")))
         
-    drawBtn_2()        
+    drawBtn_2()
     
     
