@@ -14,10 +14,10 @@ st.image(img_trajectoire)
 st.write("La démarche suivie se résumé ainsi :")
 st.write("1. Effectuer l’analyse du problème posé dans sa globalité et tracer la trajectoire pour les étapes suivantes")
 st.write("2. Analyser les datasets mis à notre disposition en tant que source de donnée : contenu (texte et images), \
-    visualisation des données, la quantification des métriques et des indicateursstatistiques pertinents")
+    visualisation des données, la quantification des métriques et des indicateurs statistiques pertinents")
 st.write("3. Réaliser toute la phase de preprocessing afin de rendre le dataset cible exploitable, \
     de meilleure qualité dans l’objectif d’obtenir des résultats performants (scoring, prédiction des données de tests ou de nouvelles données, temps d’exécution…")
 st.write("4. S’agissant d’un problème de classification des produits selon leurs catégories, procéder aux expérimentations des modèles dans les grandes typologies, \
-    à savoir la classification de ML (Machine Learning), de DEEP learning (CNN, RNN etc., voir utilisation des modèle pré-entrainé BERT, GLOVE etc.")
+    à savoir la classification de ML (Machine Learning), de DEEP learning (CNN, RNN etc., voire utilisation des modèles pré-entrainés comme BERT, GLOVE etc.")
 
     

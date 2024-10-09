@@ -71,29 +71,30 @@ with tab1:
     img_analyse_graphe_3 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_3.png"))
     img_analyse_graphe_4 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_4.png"))
     
-    st.html("<h1><span  style='color:orange'>Répartition des catégories selon les decriptions associées :</span></h1>")
+    st.header("Graphes de répartitions avant le cleanning")
+    
+    st.html("<h3><span  style='color:orange'>Répartition des catégories selon les decriptions associées :</span></h3>")
     st.image(img_analyse_graphe_1)
     
-    st.html("<h1><span  style='color:orange'>Répartition des catégories selon les designations associées :</span></h1>")
+    st.html("<h3><span  style='color:orange'>Répartition des catégories selon les designations associées :</span></h3>")
     st.image(img_analyse_graphe_2)
     
-    st.html("<h1><span  style='color:orange'>Répartition des catégories selon les designations associées :</span></h1>\
-           Les actions suivantes ont été menées pour donner la nouvelle répartition des catégories ci-dessous un peu mieux équilibrée que précédemment\
+    st.header("Répartition des catégories selon les designations associées et cartographie en cloud des mots après le cleaning")
+    st.html("Les actions suivantes ont été menées pour donner la nouvelle répartition des catégories ci-dessous un peu mieux équilibrée que précédemment\
            <ul><li>Suppression des valeurs nulles</li><ul>\
             <ul><li>Suppression des doublons</li><ul>\
             <ul><li>Suppression des expressions n'apportant aucune valeur sémantique relative au produit</li><ul>\
             <ul><li>Ajout d'une variable descriptive des 27 catgories à partir de l'analyse des images associées aux produits</li><ul>")
     st.image(img_analyse_graphe_3)
     
-    st.html("<h1><span style='color:orange'>Cartographie en cloud des mots les plus utilisés :</span></h1>")
     st.html("<p>Les mots en fonction de leur taille dans le cloud, révèlent leurs fréquence dans les deux variables explicatives combinées,\
         la désignation des produits et la description associée. D'une manière indirecte, les mots mis plus en avant révèlent la catégorie des produits\
             la plus dominante en terme de description comme les mot <span style='color: red'><strong>jeu, enfant, sac, piscine...</strong></span></p>")
     st.image(img_analyse_graphe_4)
     
     
+    st.header("Graphes de répartitions après le cleanning en live")
     #   Load some graphs in live
-    st.html("<h1><span  style='color:orange'>Graphes de distribution</span></h1>")
     def drawBtn_1():
         btn_load_graphs = st.button("Charger les graphes",  type="primary" )
         if btn_load_graphs:
@@ -104,6 +105,13 @@ with tab1:
         pickles_apth = "./data/cleaned_data.pkl"
         if isFileExist(pickles_apth):
             print("Reading from pickle file from " + f"{pickles_apth} ...")
+            df = pd.read_pickle(f"{pickles_apth}")
+            
+            df_codes = get_codes_df()
+            df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
+            df['prdtypecode'] = df['prdtypecode'].astype(int)
+            df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
+            
             df = pd.read_pickle(f"{pickles_apth}")
             sns.set_theme(rc={'figure.figsize': (10, 7)})
             fig, ax = plt.subplots(nrows= 1, ncols= 1)
@@ -122,17 +130,18 @@ with tab1:
             g2.set_title("Distribution de la longueur de la variable 'desi_desc'")
             st.pyplot(g2.figure)
             
-            df_codes = get_codes_df()
-            df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
-            df['prdtypecode'] = df['prdtypecode'].astype(int)
-            df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
-            g3 =sns.barplot(data=df_with_cats, x='catégorie', y='prdtypecode', estimator="count", orient='v', errorbar=None, ax=ax, palette='Spectral')
+            g3 =sns.countplot(data=df_with_cats,  x='prdtypecode',  orient='v', palette='Spectral')
             g3.set_title("Distribution en nombre de produits par catégorie")
             g3.set_xlabel('Catégories')
             g3.set_ylabel('Nombre de produits')
             ax.tick_params(axis='x', rotation=90)
+            plt.legend(loc='lower left')
+            #g3.set_xticklabels(labels=df_with_cats["catégorie"].unique())
             st.pyplot(g3.figure)
-
+            
+            #st.bar_chart(df_with_cats, x="catégorie", y="prdtypecode", color="catégorie", x_label ="Catégories", y_label="Nombre de produits", stack=False)
+            
+            
         else:
             st.html("Fichier PICKLE introuvable ici " + pickles_apth)
 
