@@ -59,7 +59,7 @@ def get_codes_df():
 st.title("Analyse exploratoire et preprossing")
 
 
-# Configuration de la barre latérale
+# Configuration des tabs
 tabs_title = ["🗃Partie texte", "🗃Partie images"]
 tab1, tab2 = st.tabs(tabs_title)
 
