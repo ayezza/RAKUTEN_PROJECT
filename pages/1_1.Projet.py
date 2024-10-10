@@ -14,10 +14,11 @@ st.html("<h1><span  style='color:orange'>Contexte</span></h1>\
     de produits e-commerce Rakuten à partir de textes et images issus des données. Cette vitrine STEAMLIT présente \
     une synthèse des travaux réalisés par l’équipe projet, des résultats obtenus, \
     mais aussi les difficultés rencontrées et les challenges futurs ouvrant des opportunités \
-    à des améliorations des modèles proposés ou nouveaux.\
-    \
-    <br><br><p>Le but du travail réalisé dans le cadre du projet est de :\
-    <br><span style='color:green;text-align:center;font-size:32px;height:32px;background-color:#FFFFFF;'> \
+    à des améliorations des modèles proposés ou nouveaux.")
+
+st.html("<p>Le but du travail réalisé dans le cadre du projet est de :</p>")
+with st.container(height=350):    
+    st.html("<span style='color:green;text-align:center;font-size:32px;height:32px;background-color:#FFFFFF;'> \
     Fournir un moyen au travers des modèles, de <strong>prédire la catégorie recherchée d’un produit en fonction \
         soit d’un texte descriptif, une ou plusieurs images, voire les deux à la fois.</strong>\
     </span><br><br>\
@@ -25,9 +26,9 @@ st.html("<h1><span  style='color:orange'>Contexte</span></h1>\
     <span style='color:orange;text-align:center;font-size:24px;height:24px;background-color:#FFFFFF;'>\
     Les entreprises, notamment celles exposant des sites e-commerce, ont un besoin grandissant \
     d’identifier les désirs de leurs clients et visiteurs en termes d’achat de produits bien précis ou de  promotions bien visées. \
-    </span><br><br> \
-    \
-    C’est au travers des modèles éprouvés que ces sociétés peuvent répondre d’une manière rapide et la plus précise possible, \
+    </span>")
+    
+st.html(" C’est au travers des modèles éprouvés que ces sociétés peuvent répondre d’une manière rapide et la plus précise possible, \
         sujet sur lequel répond partiellement le projet réalisé dans le cadre de notre formation accélérée.</p>")
 
 st.html("<h1><span  style='color:orange'>Objectifs</span></h1>\
