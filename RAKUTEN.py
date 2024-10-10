@@ -10,6 +10,7 @@ import os
 st.set_page_config(
     page_title="Projet RAKUTEN",
     page_icon="🚀"
+    layout='wide',
 )
 
 st.title("Accueil - Projet RAKUTEN")
