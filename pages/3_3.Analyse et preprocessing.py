@@ -1,4 +1,4 @@
-from pathlib import Path
+
 import streamlit as st
 from PIL import Image
 import numpy as np
@@ -6,6 +6,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+import requests
+
+# This is relative root directory af trai and test images
+#IMAGES_ROOT = os.path.join(os.getcwd(), "images")
+IMAGES_ROOT = r"https://www.anigraphics.fr/images"
+
 
 
 st.title("Analyse et preprocessing")
@@ -86,10 +92,17 @@ tab1, tab2, tab3 = st.tabs(tabs_title)
 
 # TAB Analyse du texte
 with tab1:
-    img_analyse_graphe_1 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_1.png"))
-    img_analyse_graphe_2 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_2.png"))
-    img_analyse_graphe_3 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_3.png"))
-    img_analyse_graphe_4 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_4.png"))
+    
+    #img_analyse_graphe_1 = Image.open(IMAGES_ROOT + "/"  + "analyse_graphe_1.png")
+    #img_analyse_graphe_2 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png")
+    #img_analyse_graphe_3 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png")
+    #img_analyse_graphe_4 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png")
+    
+    img_analyse_graphe_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_1.png", stream=True).raw)
+    img_analyse_graphe_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png", stream=True).raw)
+    img_analyse_graphe_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png", stream=True).raw)
+    img_analyse_graphe_4 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png", stream=True).raw)
+    
     
     st.header("Graphes de répartitions avant le cleanning")
     
@@ -197,9 +210,13 @@ with tab1:
 
 # TAB Analyse des images"
 with tab2:
-    img_explore_images_1 = Image.open(os.path.join(os.getcwd(), "images", "freq_img_taille_bits.png"))
-    img_explore_images_2 = Image.open(os.path.join(os.getcwd(), "images", "boxplot_img_taille_bits.png"))
-    img_explore_images_3 = Image.open(os.path.join(os.getcwd(), "images", "anova_test_img_taille_bits.jpg"))
+    #img_explore_images_1 = Image.open(IMAGES_ROOT + "/"  + "freq_img_taille_bits.png")
+    #img_explore_images_2 = Image.open(IMAGES_ROOT + "/"  + "boxplot_img_taille_bits.png")
+    #img_explore_images_3 = Image.open(IMAGES_ROOT + "/"  + "anova_test_img_taille_bits.jpg")
+    
+    img_explore_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "freq_img_taille_bits.png", stream=True).raw)
+    img_explore_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "boxplot_img_taille_bits.png", stream=True).raw)
+    img_explore_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "anova_test_img_taille_bits.jpg", stream=True).raw)
     
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -222,8 +239,8 @@ with tab2:
         st.image(img_explore_images_3)
         st.write("Nous réalisons un test ANOVA (qui sert à savoir si plusieurs groupes ont des \
                 différences significatives entre eux) avec les hypothèses suivantes:")
-        st.write("> H0 : la taille des images n'a pas d'influence sur la catégorie")
-        st.write("> H1 : la taille des images a une influence sur la catégorie")
+        st.write("> H0 : La taille des images n'a pas d'influence sur la catégorie")
+        st.write("> H1 : La taille des images a une influence sur la catégorie")
         st.write("Au vu des résulats (**p-value très inférieure à 0.05**) et **F-stat très élevée (+ de 339)**, on peut rejeter \
                 l'hypothèse H0 au profit de la H1 : la taille des images a une influence sur la catégorie. \
                 C'est donc une feature qui pourrait éventuellement nous servir par la suite pour catégoriser les images, \
@@ -231,10 +248,15 @@ with tab2:
 
     st.html("<hr")
 
-
-    img_analyse_images_1 = Image.open(os.path.join(os.getcwd(), "images", "exemple_preprocess_baseline.png"))
-    img_analyse_images_2 = Image.open(os.path.join(os.getcwd(), "images", "exemple_preprocess_deeplearning.png"))
-    img_analyse_images_3 = Image.open(os.path.join(os.getcwd(), "images", "exemple_preprocess_generique.png"))
+  
+    #img_analyse_images_1 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_baseline.png")
+    #img_analyse_images_2 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_deeplearning.png")
+    #img_analyse_images_3 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_generique.png")
+    
+    img_analyse_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_baseline.png", stream=True).raw)
+    img_analyse_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_deeplearning.png", stream=True).raw)
+    img_analyse_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_generique.png", stream=True).raw)
+    
     
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -257,18 +279,18 @@ with tab2:
    
 
     
-    st.write("Nous avons effectué 3 types de preprocessing:")
+    st.html("<span  style='color:orange; font-size: 24px;'>Nous avons effectué 3 types de preprocessing :</span>")
     
-    st.write("-> **Un preprocessing générique**: utilisable par tout type de modèles. Il contient 1000 images par catégorie, et \
+    st.write("- **Un preprocessing générique**: utilisable par tout type de modèles. Il contient 1000 images par catégorie, et \
     30% des images ont été **augmentées** (rotations, zoom, etc.) pour diversifier le dataset. Leur taille est inchangée  \
     (500x500) et pourra par la suite être adaptée en fonction des modèles (voir **exemple_preprocess_generique**")
     
-    st.write("-> un preprocessing pour les modèles de Deep Learning : les modèles de Deep Learning sont inclues dans des  \
+    st.write("- **Un preprocessing pour les modèles de Deep Learning** : les modèles de Deep Learning sont inclues dans des  \
     librairies qui contiennent leurs propres fonctions de preprocessing (voici un exemple de dataset image  \
     preprocessé par keras de Tensorflow: **exemple_preprocess_deeplearning**). ce preprocessing sera adapté au cas par cas en fonction  \
     des modèles.")
     
-    st.write("-> un preprocessing pour les modèles **baseline** : Nous allons entraîner par la suite 2 types de modèles : des \
+    st.write("- **Un preprocessing pour les modèles **baseline** : Nous allons entraîner par la suite 2 types de modèles : des \
     modèles deep learning (plus complexes) et des modèles baseline (plus simples).  \
     Pour les modèles baseline, nous avons réduit les images en 64x64 pixels (au lieu de 500x500). \
     Nous les avons passées en niveaux de gris. (voir graphe **exemple_preprocess_baseline**")
@@ -284,7 +306,7 @@ with tab3:
         st.html("<h4><span  style='color:orange'>Affichage des images par index (ligne)</span></h4>")
         st.write("Le dataset étant brassé, deux index qui se suivent ne donnent pas la même catégorie de produit !")
         image_index = st.number_input(
-            "Sélectionnez un index d'image entre 0 et 82264 et tapez sur ENTREE :", min_value=0, max_value=82264, step =1, value=0, placeholder="tapez un nombre"
+            "Sélectionnez un index d'image entre 0 et 82263 et tapez sur ENTREE :", min_value=0, max_value=82263, step =1, value=0, placeholder="tapez un nombre"
         )
         
         if (image_index>=0) and (image_index<82264):
@@ -294,9 +316,11 @@ with tab3:
             imgid = df_with_cats.iloc[image_index, 3]
             
             if isFileExist(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg")):
-                img = Image.open(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg"))
+                # img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
+                img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw) 
             else:
-                img = Image.open(os.path.join(os.getcwd(), "images/image_test", f"image_{imgid}_product_{prdid}.jpg"))
+                #img = Image.open(IMAGES_ROOT +   "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+                img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
             
             # Adds a subplot at the 1st positio 
             fig, ax = plt.subplots(1, 1, figsize=(7,7)) 
@@ -304,9 +328,12 @@ with tab3:
             ax.set_title(prod)
             ax.axis('off') 
             st.pyplot(ax.figure)
+            
+            st.text("Code de la catégorie :" + str(df_with_cats.iloc[image_index, 4]))
+            st.text("Catégorie :" + str(df_with_cats.iloc[image_index, 6]))
     
     with col2:
-        st.html("<h4><span  style='color:orange'>Affichage des images par catégorie sélectionnée</span></h4>")    
+        st.html("<h4><span  style='color:orange'>Affichage aléatoire des images par catégorie sélectionnée</span></h4>")    
         st.write("Cette catégorisation est le résultat d'un travail réalisé à la fois sur des échantillons d'images et du texte.")
         list_elements = []
         for cat in np.sort(df_with_cats['catégorie'].unique()):
@@ -329,16 +356,20 @@ with tab3:
             prod = row['designation']
             prdid = str(int(row['productid']))
             imgid = str(int(row['imageid']))
+            code = row['prdtypecode']
             cat = str(row['catégorie'])
             if isFileExist(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg")):
-                img = Image.open(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg"))
+                
+                #img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
+                img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
             else:
-                img = Image.open(os.path.join(os.getcwd(), "images/image_test", f"image_{imgid}_product_{prdid}.jpg"))
+                #img = Image.open(IMAGES_ROOT +  "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+                img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
             
             # Adds a subplot at the 1st positio 
             fig, ax = plt.subplots(1, 1) 
             ax.imshow(img)
-            ax.set_title(prod)
+            ax.set_title('Code : ' + str(list(code.values)[0]) + '\n' + prod.values[0])
             ax.axis('off') 
             st.pyplot(ax.figure)
         
@@ -356,7 +387,8 @@ with tab3:
         df_codes = get_codes_df()
         for code, cat in zip(df_codes['prdtypecode'], df_codes['catégorie']):
             st.write("Catégorie : " + cat)
-            st.image(Image.open(os.path.join(os.getcwd(), "images", "code-" + str(code) + ".png")))
+            #st.image(Image.open(IMAGES_ROOT + "/" + "code-" + str(list(code.values)[0]) + ".png"))
+            st.image(Image.open(requests.get(IMAGES_ROOT + "/code-" + str(code) + ".png", stream=True).raw) )
             
         
     drawBtn_2()

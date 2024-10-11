@@ -17,7 +17,7 @@ st.html("<h1><span  style='color:orange'>Contexte</span></h1>\
     à des améliorations des modèles proposés ou nouveaux.")
 
 st.html("<p>Le but du travail réalisé dans le cadre du projet est de :</p>")
-with st.container(height=350):    
+with st.container(height=300):    
     st.html("<span style='color:green;text-align:center;font-size:32px;height:32px;background-color:#FFFFFF;'> \
     Fournir un moyen au travers des modèles, de <strong>prédire la catégorie recherchée d’un produit en fonction \
         soit d’un texte descriptif, une ou plusieurs images, voire les deux à la fois.</strong>\
@@ -25,7 +25,7 @@ with st.container(height=350):
     \
     <span style='color:orange;text-align:center;font-size:24px;height:24px;background-color:#FFFFFF;'>\
     Les entreprises, notamment celles exposant des sites e-commerce, ont un besoin grandissant \
-    d’identifier les désirs de leurs clients et visiteurs en termes d’achat de produits bien précis ou de  promotions bien visées. \
+    d’identifier les désirs de leurs clients et visiteurs en termes d’achat de produits bien précis ou proposer des promotions bien visées. \
     </span>")
     
 st.html(" C’est au travers des modèles éprouvés que ces sociétés peuvent répondre d’une manière rapide et la plus précise possible, \

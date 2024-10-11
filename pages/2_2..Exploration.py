@@ -4,7 +4,11 @@ from PIL import Image
 import numpy as np
 import pandas as pd
 import os
+import requests
 
+
+#IMAGES_ROOT = os.path.join(os.getcwd(), "images")
+IMAGES_ROOT = r"https://www.anigraphics.fr/images"
 
 
 def isFileExist(fileFullPath):
@@ -65,10 +69,17 @@ st.write(cur_dir)
 
 with tab1:
     # liste des images statiques
-    img_train_set = Image.open(os.path.join(os.getcwd(), "images", "train_set.png"))
-    img_test_set = Image.open(os.path.join(os.getcwd(), "images", "test_set.png"))
-    img_target_set = Image.open(os.path.join(os.getcwd(), "images", "target_set.png"))
-    img_schema_dataset = Image.open(os.path.join(os.getcwd(), "images", "schema_source_dataset.png"))
+    #img_train_set = Image.open(os.path.join(os.getcwd(), "images", "train_set.png"))
+    #img_test_set = Image.open(os.path.join(os.getcwd(), "images", "test_set.png"))
+    #img_target_set = Image.open(os.path.join(os.getcwd(), "images", "target_set.png"))
+    #img_schema_dataset = Image.open(os.path.join(os.getcwd(), "images", "schema_source_dataset.png"))
+    
+    img_train_set = Image.open(requests.get(IMAGES_ROOT +  "/"  + "train_set.png", stream=True).raw)
+    img_test_set = Image.open(requests.get(IMAGES_ROOT +  "/"  + "test_set.png", stream=True).raw)
+    img_target_set = Image.open(requests.get(IMAGES_ROOT +  "/"  + "target_set.png", stream=True).raw)
+    img_schema_dataset = Image.open(requests.get(IMAGES_ROOT +  "/"  + "schema_source_dataset.png", stream=True).raw)
+    
+    
     
     st.html("<h3><span  style='color:orange'>Schéma des jeux de données d'entraînement et de test :</span></h3>")
     st.image(img_schema_dataset)
@@ -137,7 +148,9 @@ with tab2:
         df_codes = get_codes_df()
         df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
         df['prdtypecode'] = df['prdtypecode'].astype(int)
+        df['productid'] = df['productid'].astype('int64')
+        df['imageid'] = df['imageid'].astype('int64')
         df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
         st.write("**Dimension du dataframe :** " + str(df_with_cats.shape))
-        st.write(df_with_cats.head(20))
+        st.write(df_with_cats.head(1000))
     
