@@ -86,11 +86,36 @@ df_with_cats.index = df_with_cats.index.astype('int64')
 
 
 # Configuration des tabs
-tabs_title = ["🗃Texte uniquement", "🗃Images uniquement", "🗃Exploration intéractive des images"]
-tab1, tab2, tab3 = st.tabs(tabs_title)
-
+tabs_title = ["🗃Texte & Image", "🗃Texte uniquement", "🗃Images uniquement", "🗃Exploration intéractive des images"]
+tab0, tab1, tab2, tab3 = st.tabs(tabs_title)
 
 # TAB Analyse du texte
+with tab0:
+    st.header("Exploration du texte et images")
+    st.write("L'objectif de l’exercice d’exploration est de :") 
+    st.write("1- Identifier dans quelle mesure le contenu de la « désignation » et de la « description » peut se rapporter à un type de produit")
+    st.write("2- Quel type de nettoyage des données doit être effectué pour que les données textuelles soient les plus pertinentes ?")
+    st.write("3- Déterminer la sémantique derrière le code de type de produit en affichant des images aléatoires et les principaux mots-clés pour chaque code de type de produit, ce qui aiderait à une meilleure interprétation humaine des résultats au cours de l'expérimentation du modèle.")
+    img_explore_txt_byprdcode = Image.open(os.path.join(os.getcwd(), "images", "explore-txt-prdcat.png"))
+    st.image(img_explore_txt_byprdcode)
+
+    st.header("Conclusions")
+    st.divider()
+    st.write("La combinaison de la « désignation » et de la « description » semble donner de meilleurs résultats en termes d'identification des caractéristiques liées au type de produit.")
+    st.divider()
+    st.write("Les termes (token) pouvant être ignorés :")
+    st.write("* Stop words pour l’anglais et le français")
+    st.write("* ponctuation")
+    st.write("* vocabulaire des dimensions : cm, mm, hauteur, etc.")
+    st.write("* vocabulaire des couleurs : blanc, gris, etc.")
+    st.write("* Balises et encodage HTML")
+    st.write("* Valeurs numériques")
+    st.write("* Besoin de lemmatisation : processus de réduction d'un token à son lemme")
+    st.divider()
+    st.write("La liste des catégories descriptives a été établie comme suit :")
+    st.dataframe(df_codes)
+
+
 with tab1:
     
     #img_analyse_graphe_1 = Image.open(IMAGES_ROOT + "/"  + "analyse_graphe_1.png")
