@@ -64,7 +64,7 @@ def get_codes_df():
     return df_codes
     
 
-pickles_apth = "../../pickles/cleaned_data.pkl"
+pickles_apth = "./data/cleaned_data.pkl"
 print("Reading from pickle file from " + f"{pickles_apth} ...")
 df = pd.read_pickle(f"{pickles_apth}")
 
@@ -88,10 +88,6 @@ df_with_cats.index = df_with_cats.index.astype('int64')
 # Configuration des tabs
 tabs_title = ["🗃Texte & Image", "🗃Texte uniquement", "🗃Images uniquement", "🗃Exploration intéractive des images"]
 tab0, tab1, tab2, tab3 = st.tabs(tabs_title)
-<<<<<<< HEAD:src/streamlit/pages/3_3.Preprocessing.py
-=======
-
->>>>>>> 1cc160b24a79e7ce6155ce3a192a89549b1d027b:src/streamlit/pages/3_3.Analyse et preprocessing.py
 
 # TAB Analyse du texte
 with tab0:
@@ -121,7 +117,6 @@ with tab0:
 
 
 with tab1:
-<<<<<<< HEAD:src/streamlit/pages/3_3.Preprocessing.py
     
     #img_analyse_graphe_1 = Image.open(IMAGES_ROOT + "/"  + "analyse_graphe_1.png")
     #img_analyse_graphe_2 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png")
@@ -133,13 +128,6 @@ with tab1:
     img_analyse_graphe_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png", stream=True).raw)
     img_analyse_graphe_4 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png", stream=True).raw)
     
-=======
-
-    img_analyse_graphe_1 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_1.png"))
-    img_analyse_graphe_2 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_2.png"))
-    img_analyse_graphe_3 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_3.png"))
-    img_analyse_graphe_4 = Image.open(os.path.join(os.getcwd(), "images", "analyse_graphe_4.png"))
->>>>>>> 1cc160b24a79e7ce6155ce3a192a89549b1d027b:src/streamlit/pages/3_3.Analyse et preprocessing.py
     
     st.header("Graphes de répartitions avant le cleanning")
     
