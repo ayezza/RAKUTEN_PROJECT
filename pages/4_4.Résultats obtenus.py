@@ -14,6 +14,10 @@ IMAGES_ROOT = r"https://www.anigraphics.fr/images"
 st.title("Résultats obtenus")
 
 
+<<<<<<< HEAD:src/streamlit/pages/4_4.Résultats obtenus.py
+=======
+
+>>>>>>> 1cc160b24a79e7ce6155ce3a192a89549b1d027b:src/streamlit/pages/5_5.Résultats obtenus.py
 tabs_title = ["🗃Texte", "🗃Image", "🗃🗃Texte & image"]
 tab1, tab2, tab3 = st.tabs(tabs_title)
 
@@ -34,7 +38,10 @@ with tab1:
     st.write("- Sélection du best modèle")
     st.write("- Optimisation du best modèle avec un GridSearchCV")
     st.divider()
+<<<<<<< HEAD:src/streamlit/pages/4_4.Résultats obtenus.py
     
+=======
+>>>>>>> 1cc160b24a79e7ce6155ce3a192a89549b1d027b:src/streamlit/pages/5_5.Résultats obtenus.py
     
     st.write("### Modèles Machine Learning (ML)")
     col1, col2, col3= st.columns(3)
