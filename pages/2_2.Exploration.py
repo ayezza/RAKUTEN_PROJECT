@@ -96,11 +96,8 @@ with tab1:
     st.write(">Le taux des designations en doublon reste relativement faible 3%")
     st.write(">Quant au taux des descriptions en doublon de l'ordre de 45% est assez élevé du fait certainement du copier/coller pour les produits dans la même catégorie/univers !")
     
-    st.html("<h3><span  style='color:orange'>Jeu de données de test :</spane></h3>")
-    st.image(image=img_test_set)
-    
-    st.html("<h3><span  style='color:orange'>Remarque :</span></h3>")
-    st.write(">Aussi bien le jeu de données d'entraînement que celui de test, ne contienent les données relatives à la cible,\
+  
+    st.write(">Remarque : Le jeu de données d'entraînement ne contienent pas les données relatives à la cible,\
         à savoir, les **catégories associées aux produits**.")
      
     img_shema_target = Image.open(os.path.join(os.getcwd(), "images", "shema_target.png"))
@@ -120,15 +117,7 @@ with tab1:
     st.image(img_target_set)
     
     st.html("<h4><span  style='color:orange'>Dataset cible</span></h4>")
-    st.write(">Le seul jeu de données contenant la cible, correspond uniquement au jeu de données d'entrainement ci-dessus **(84 916 lignes)**, \
-        raison pour laquelle :")
-    st.write("1. #### Le CSV de test ne sera pas retenu pour la modélisation")
-    st.write("2. #### Le CSV d'entraînement combiné avec le CSV de la cible (catégories des produits) sera notre dataset pour la modélisation")
-   
-    st.html("<hr>")
-    st.text("X_test_update.csv ==> X")
-    st.text("X_train_update.csv + Y_train_CVw08PX.csv ==> Dataset cible")
-    
+    st.write(">#### Le CSV d'entraînement combiné avec le CSV de la cible (catégories des produits) sera notre dataset pour la modélisation")
     
 with tab2:
     img_datset_cibe = Image.open(os.path.join(os.getcwd(), "images", "datset_cibe.png"))

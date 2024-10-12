@@ -118,15 +118,15 @@ with tab0:
 
 with tab1:
     
-    #img_analyse_graphe_1 = Image.open(IMAGES_ROOT + "/"  + "analyse_graphe_1.png")
-    #img_analyse_graphe_2 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png")
-    #img_analyse_graphe_3 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png")
-    #img_analyse_graphe_4 = Image.open(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png")
+    img_analyse_graphe_1 = Image.open(os.path.join(os.getcwd(), "images",  "analyse_graphe_1.png"))
+    img_analyse_graphe_2 = Image.open(os.path.join(os.getcwd(), "images",  "analyse_graphe_2.png"))
+    img_analyse_graphe_3 = Image.open(os.path.join(os.getcwd(), "images",  "analyse_graphe_3.png"))
+    img_analyse_graphe_4 = Image.open(os.path.join(os.getcwd(), "images",  "analyse_graphe_4.png"))
     
-    img_analyse_graphe_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_1.png", stream=True).raw)
-    img_analyse_graphe_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png", stream=True).raw)
-    img_analyse_graphe_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png", stream=True).raw)
-    img_analyse_graphe_4 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png", stream=True).raw)
+    #img_analyse_graphe_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_1.png", stream=True).raw)
+    #img_analyse_graphe_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_2.png", stream=True).raw)
+    #img_analyse_graphe_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_3.png", stream=True).raw)
+    #img_analyse_graphe_4 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "analyse_graphe_4.png", stream=True).raw)
     
     
     st.header("Graphes de répartitions avant le cleanning")
@@ -235,13 +235,13 @@ with tab1:
 
 # TAB Analyse des images"
 with tab2:
-    #img_explore_images_1 = Image.open(IMAGES_ROOT + "/"  + "freq_img_taille_bits.png")
-    #img_explore_images_2 = Image.open(IMAGES_ROOT + "/"  + "boxplot_img_taille_bits.png")
-    #img_explore_images_3 = Image.open(IMAGES_ROOT + "/"  + "anova_test_img_taille_bits.jpg")
+    img_explore_images_1 = Image.open(os.path.join(os.getcwd(), "images", "freq_img_taille_bits.png"))
+    img_explore_images_2 = Image.open(os.path.join(os.getcwd(), "images", "boxplot_img_taille_bits.png"))
+    img_explore_images_3 = Image.open(os.path.join(os.getcwd(), "images", "anova_test_img_taille_bits.jpg"))
     
-    img_explore_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "freq_img_taille_bits.png", stream=True).raw)
-    img_explore_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "boxplot_img_taille_bits.png", stream=True).raw)
-    img_explore_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "anova_test_img_taille_bits.jpg", stream=True).raw)
+    #img_explore_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "freq_img_taille_bits.png", stream=True).raw)
+    #img_explore_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "boxplot_img_taille_bits.png", stream=True).raw)
+    #img_explore_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "anova_test_img_taille_bits.jpg", stream=True).raw)
     
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -274,13 +274,13 @@ with tab2:
     st.html("<hr")
 
   
-    #img_analyse_images_1 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_baseline.png")
-    #img_analyse_images_2 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_deeplearning.png")
-    #img_analyse_images_3 = Image.open(IMAGES_ROOT +  "/"  +"exemple_preprocess_generique.png")
+    img_analyse_images_1 = Image.open(os.path.join(os.getcwd(), "images",  "exemple_preprocess_baseline.png"))
+    img_analyse_images_2 = Image.open(os.path.join(os.getcwd(), "images",  "exemple_preprocess_deeplearning.png"))
+    img_analyse_images_3 = Image.open(os.path.join(os.getcwd(), "images",  "exemple_preprocess_generique.png"))
     
-    img_analyse_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_baseline.png", stream=True).raw)
-    img_analyse_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_deeplearning.png", stream=True).raw)
-    img_analyse_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_generique.png", stream=True).raw)
+    #img_analyse_images_1 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_baseline.png", stream=True).raw)
+    #img_analyse_images_2 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_deeplearning.png", stream=True).raw)
+    #img_analyse_images_3 = Image.open(requests.get(IMAGES_ROOT +  "/"  + "exemple_preprocess_generique.png", stream=True).raw)
     
     
     col1, col2, col3 = st.columns(3)
@@ -306,16 +306,16 @@ with tab2:
     
     st.html("<span  style='color:orange; font-size: 24px;'>Nous avons effectué 3 types de preprocessing :</span>")
     
-    st.write("- **Un preprocessing générique**: utilisable par tout type de modèles. Il contient 1000 images par catégorie, et \
+    st.write("1. **Un preprocessing générique**: utilisable par tout type de modèles. Il contient 1000 images par catégorie, et \
     30% des images ont été **augmentées** (rotations, zoom, etc.) pour diversifier le dataset. Leur taille est inchangée  \
     (500x500) et pourra par la suite être adaptée en fonction des modèles (voir **exemple_preprocess_generique**")
     
-    st.write("- **Un preprocessing pour les modèles de Deep Learning** : les modèles de Deep Learning sont inclues dans des  \
+    st.write("2. **Un preprocessing pour les modèles de Deep Learning** : les modèles de Deep Learning sont inclues dans des  \
     librairies qui contiennent leurs propres fonctions de preprocessing (voici un exemple de dataset image  \
     preprocessé par keras de Tensorflow: **exemple_preprocess_deeplearning**). ce preprocessing sera adapté au cas par cas en fonction  \
     des modèles.")
     
-    st.write("- **Un preprocessing pour les modèles **baseline** : Nous allons entraîner par la suite 2 types de modèles : des \
+    st.write("3. **Un preprocessing pour les modèles baseline** : Nous allons entraîner par la suite 2 types de modèles : des \
     modèles deep learning (plus complexes) et des modèles baseline (plus simples).  \
     Pour les modèles baseline, nous avons réduit les images en 64x64 pixels (au lieu de 500x500). \
     Nous les avons passées en niveaux de gris. (voir graphe **exemple_preprocess_baseline**")
@@ -325,7 +325,7 @@ with tab2:
     
 # TAB TExploration intractive des images  
 with tab3:
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
         st.html("<h4><span  style='color:orange'>Affichage des images par index (ligne)</span></h4>")
@@ -341,12 +341,17 @@ with tab3:
             imgid = df_with_cats.iloc[image_index, 3]
             
             #if isFileExist(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg")):
-            if Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw):
-                # img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
-                img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw) 
-            else:
-                #img = Image.open(IMAGES_ROOT +   "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+            
+            # by defaut it's a train image, otherwise open it from test
+            img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+            if img is None:
                 img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+                
+                # img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
+                #img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw) 
+            #else:
+                #img = Image.open(IMAGES_ROOT +   "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+                #img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
             
             # Adds a subplot at the 1st positio 
             fig, ax = plt.subplots(1, 1, figsize=(7,7)) 
@@ -386,12 +391,17 @@ with tab3:
             cat = str(row['catégorie'])
             
             #if isFileExist(os.path.join(os.getcwd(), "images/image_train", f"image_{imgid}_product_{prdid}.jpg")):
-            if Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw):    
-                #img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
-                img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
-            else:
-                #img = Image.open(IMAGES_ROOT +  "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+            #if Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw):    
+            #    #img = Image.open(IMAGES_ROOT +  "/image_train/" + f"image_{imgid}_product_{prdid}.jpg")
+            #    img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+            #else:
+            #    #img = Image.open(IMAGES_ROOT +  "/image_test/" + f"image_{imgid}_product_{prdid}.jpg")
+            #    img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+            
+            img = Image.open(requests.get(IMAGES_ROOT +  "/image_train/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+            if img is None:
                 img = Image.open(requests.get(IMAGES_ROOT +  "/image_test/"  + f"image_{imgid}_product_{prdid}.jpg", stream=True).raw)
+                
             
             # Adds a subplot at the 1st positio 
             fig, ax = plt.subplots(1, 1) 
@@ -399,24 +409,21 @@ with tab3:
             ax.set_title('Code : ' + str(list(code.values)[0]) + '\n' + prod.values[0])
             ax.axis('off') 
             st.pyplot(ax.figure)
-        
     
-    st.html("<hr>")
-    
-    st.html("<h4><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h4>")
-    def drawBtn_2():
-        btn_load_images = st.button("Charger les échantillons",  type="primary" )
-        if btn_load_images:
-            load_images()
-            st.text("Les images ont été chargées !")
-        
-    def load_images():
-        df_codes = get_codes_df()
-        for code, cat in zip(df_codes['prdtypecode'], df_codes['catégorie']):
-            st.write("Catégorie : " + cat)
-            #st.image(Image.open(IMAGES_ROOT + "/" + "code-" + str(list(code.values)[0]) + ".png"))
-            st.image(Image.open(requests.get(IMAGES_ROOT + "/code-" + str(code) + ".png", stream=True).raw) )
+    with col3:
+        col3.html("<h4><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h4>")
+        def drawBtn_2():
+            btn_load_images = col3.button("Charger les échantillons",  type="primary" )
+            if btn_load_images:
+                load_images()
+                col3.text("Les images ont été chargées !")
             
-        
-    drawBtn_2()
+        def load_images():
+            df_codes = get_codes_df()
+            for code, cat in zip(df_codes['prdtypecode'], df_codes['catégorie']):
+                col3.write("Catégorie : " + cat)
+                col3.image(os.path.join(os.getcwd(), "images", "code-" + str(code) + ".png"))
+                #st.image(Image.open(requests.get(IMAGES_ROOT + "/code-" + str(code) + ".png", stream=True).raw) )
+            
+        drawBtn_2()
     
