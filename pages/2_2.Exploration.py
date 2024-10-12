@@ -58,10 +58,31 @@ def get_codes_df():
     df_codes = pd.DataFrame({'prdtypecode': list(cats.keys()), 'catégorie': list(cats.values())})
     return df_codes
     
+def load_data_from_pickle():
+    pickles_apth = "./data/cleaned_data.pkl"
+    if isFileExist(pickles_apth):
+        print("Reading from pickle file from " + f"{pickles_apth} ...")
+        df = pd.read_pickle(f"{pickles_apth}")
+        df_codes = get_codes_df()
+        df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
+        df['prdtypecode'] = df['prdtypecode'].astype(int)
+        df['productid'] = df['productid'].astype('int64')
+        df['imageid'] = df['imageid'].astype('int64')
+        df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
+        st.write("dataset chargé")
+        return df_with_cats
+
+    else:
+        st.write("Impossible de charger le dataset ! ")
+        return None
 
 
 
 st.title("Exploration")
+
+df_with_cats = load_data_from_pickle()
+if df_with_cats is None:
+    st.write("Ouch ! Impossible de charger le dataset à partir du PICKLE.")
 
 # Configuration de la barre latérale
 tabs_title = ["🚀Jeu de données intial", "🚀Jeu de données cible", "🗃Exploration intéractive des images"]
@@ -134,17 +155,17 @@ with tab2:
     st.html("<h4>Aperçu du jeu de données augmenté, transformé et nettoyé</h4>")
     st.write(">Uniquement la nouvelle colonne **desi_desc** fusion de **designation** et **description** qui est nettoyée et considérée comme étant la variable explicative textuelle.")
     pickles_apth = "./data/cleaned_data.pkl"
-    if isFileExist(pickles_apth):
-        print("Reading from pickle file from " + f"{pickles_apth} ...")
-        df = pd.read_pickle(f"{pickles_apth}")
-        df_codes = get_codes_df()
-        df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
-        df['prdtypecode'] = df['prdtypecode'].astype(int)
-        df['productid'] = df['productid'].astype('int64')
-        df['imageid'] = df['imageid'].astype('int64')
-        df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
-        st.write("**Dimension du dataframe :** " + str(df_with_cats.shape))
-        st.write(df_with_cats)
+    #if isFileExist(pickles_apth):
+    #    print("Reading from pickle file from " + f"{pickles_apth} ...")
+    #    df = pd.read_pickle(f"{pickles_apth}")
+    #    df_codes = get_codes_df()
+    #    df_codes['prdtypecode'] = df_codes['prdtypecode'].astype(int)
+    #    df['prdtypecode'] = df['prdtypecode'].astype(int)
+    #    df['productid'] = df['productid'].astype('int64')
+    #    df['imageid'] = df['imageid'].astype('int64')
+    #    df_with_cats = pd.merge(left=df, left_on='prdtypecode', right=df_codes, right_on='prdtypecode' ).sort_values(by='catégorie')
+    st.write("**Dimension du dataframe :** " + str(df_with_cats.shape))
+    st.write(df_with_cats)
     
     
 # TAB TExploration intractive des images  

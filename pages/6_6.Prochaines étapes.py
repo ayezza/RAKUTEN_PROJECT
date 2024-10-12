@@ -10,5 +10,5 @@ st.write(">2. Expérimenter des solutions de réduction du désiquilibre de la d
 st.write(">3. Effectuer un preprocessing des images qui présentent un fond blanc important afin de faire apparaître les contours.")
 st.write(">4. **Perspective à court terme :** Une fois disposé des capacités de calcul suffisantes, notamment pour le traitement des images et l’utilisation des \
     modèles pré-entrainés comme BERT, reprendre cette partie afin d’améliorer encore plus les résultats obtenus.")
-st.write(">5. **Refactorer et industialiser le code** : **factorisation**, **dockerisation**, **déploiement sur le cloud**, **MLFlow**, etc.")
+st.write(">5. **Refactoriser et industialiser le code** : **factorisation**, **dockerisation**, **déploiement sur le cloud**, **MLFlow**, etc.")
 st.write(">6. Finalemnt, s'inspirer des modèles élaborés afin de les appliquer sur d'autres problématiques de même nature ou se rapprochant du problème présent.")
