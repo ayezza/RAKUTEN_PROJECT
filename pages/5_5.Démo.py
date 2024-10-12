@@ -11,9 +11,35 @@ import torch.nn as nn
 from sklearn.model_selection import train_test_split
 import os
 st.set_page_config(layout="wide")
+import requests
 
-df = pd.read_csv("/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/data/csv_files/img-text-clean-data.csv")
-DATA_DIR="/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/data/processed/img_classified_by_prdtypecode"
+
+def isFileExist(fileFullPath):
+    if fileFullPath is not None:
+        if os.path.isfile(fileFullPath):
+            if os.path.exists(fileFullPath):
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False
+
+
+
+#df = pd.read_csv("/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/data/csv_files/img-text-clean-data.csv")
+#DATA_DIR="/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/data/processed/img_classified_by_prdtypecode"
+
+st.write("reading CSV... ")
+st.write(str(os.path.dirname(os.path.realpath(__file__))))
+if isFileExist("./data/img-text-clean-data.csv"):
+    df = pd.read_csv("./data/img-text-clean-data.csv")
+else:
+    st.write('le fichier "./data/img-text-clean-data.csv" est introuvable !')
+    
+DATA_DIR = r"https://www.anigraphics.fr/data"
+
 NUM_CLASSES = 27
 
 prdtypecode_list = ['10', '1140', '1160', '1180', '1280', '1281', '1300', '1301', 
@@ -83,10 +109,15 @@ class EcommerceDataset(Dataset):
         image_name = self.df.iloc[idx]['image name']
 
         # path img
-        image_path = os.path.join(self.img_dir, str(prdtypecode), image_name)
+        #image_path = os.path.join(self.img_dir, str(prdtypecode), image_name)
+        image_path = DATA_DIR +  "/"  + str(prdtypecode) + "/" + image_name
+        st.write("image_path=" + image_path)
+        
+        
         
         # Chargement img
-        img = Image.open(image_path)
+        #img = Image.open(image_path)
+        img = Image.open(requests.get(image_path , stream=True).raw)
         
         # Model prediction text - vecteur de probas
         text_features = self.text_model.predict_proba([text_description])[0]
@@ -113,10 +144,15 @@ class EcommerceDataset(Dataset):
 
         return text_features, img_features, label
 
-model_combined_checkpoint = torch.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/concatmodel_2024-10-07_08-52-25_epoch10of20.pth')
-model_text = joblib.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/finalized_model_text.sav')
-model_img = torch.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/finalized_model_img.pth')
-img_model =model_img
+#model_combined_checkpoint = torch.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/concatmodel_2024-10-07_08-52-25_epoch10of20.pth')
+#model_text = joblib.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/finalized_model_text.sav')
+#model_img = torch.load('/Users/ouissamgouni/Documents/it-workspace/bootcamp-mle-24/git/final/jul24_bds_rakuten/models/save/finalized_model_img.pth')
+
+model_combined_checkpoint = torch.load('./data/concatmodel_2024-10-07_08-52-25_epoch10of20.pth')
+model_text = joblib.load('./data/finalized_model_text.sav')
+model_img = torch.load('./data/finalized_model_img.pth')
+
+img_model = model_img
 model_c = CombinedModel(text_input_size = 27, image_input_size = 27, num_classes = NUM_CLASSES)
 model_c.load_state_dict(model_combined_checkpoint)
 
@@ -164,23 +200,28 @@ with torch.no_grad():
 
                 image_name = demo_df.iloc[0]['image name']
                 prdtypecode = demo_df.iloc[0]['prdtypecode']
-                image_path = os.path.join(DATA_DIR, str(prdtypecode), image_name)   
-                img = Image.open(image_path)
+                #image_path = os.path.join(DATA_DIR, str(prdtypecode), image_name)   
+                image_path = DATA_DIR +  "/"  + str(prdtypecode) + "/" + image_name
+                
+                img = Image.open(requests.get(image_path, stream=True).raw)
+                #img = Image.open(image_path)
                 st.image(image=img)
 
                 
-                st.write('Expected product type:', prdtypecode,' ',demo_df.iloc[0]['désignation textuelle'])
+                st.write('Expected product type:\t', prdtypecode,'',demo_df.iloc[0]['désignation textuelle'])
 
 
                 text_prediction = model_text.predict([demo_df.iloc[0]['desi_desc_cleaned']])[0]
 
-                ftext="Text model :" + str(text_prediction) + ' ' + (df.loc[df['prdtypecode'] == int(text_prediction), 'désignation textuelle']).iloc[0]
+                ftext="Text model :\t" + str(text_prediction) + ' ' + (df.loc[df['prdtypecode'] == int(text_prediction), 'désignation textuelle']).iloc[0]
                 fwrite_ok_ko_(ftext, int(text_prediction) == prdtypecode)
 
                 img_prediction, probabilities = img_model.predict(image_path)
-                ftext="Image model :" + str(img_prediction) + ' ' + (df.loc[df['prdtypecode'] == int(img_prediction), 'désignation textuelle']).iloc[0]
+                #img_prediction, probabilities = img_model.predict(img)
+                ftext="Image model :\t" + str(img_prediction) + ' ' + (df.loc[df['prdtypecode'] == int(img_prediction), 'désignation textuelle']).iloc[0]
                 fwrite_ok_ko_(ftext, int(img_prediction) == prdtypecode)
 
+                st.text("Appel à la classe EcommerceDataset")
                 demo_dataset = EcommerceDataset(demo_df, model_text, model_img, DATA_DIR)
                 demo_loader = DataLoader(demo_dataset, batch_size = 1, shuffle = False)
             
