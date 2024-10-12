@@ -14,7 +14,7 @@ IMAGES_ROOT = r"https://www.anigraphics.fr/images"
 st.title("Résultats obtenus")
 
 
-tabs_title = ["🗃Texte", "🗃Image", "🗃🗃Texte & image"]
+tabs_title = ["🚀Texte", "🚀Image", "🚀🚀Texte & image"]
 tab1, tab2, tab3 = st.tabs(tabs_title)
 
 # TAB partie texte
@@ -35,7 +35,7 @@ with tab1:
     st.divider()
     
     
-    st.write("### Modèles Machine Learning (ML)")
+    st.write("### ⭐Modèles Machine Learning (ML)")
     col1, col2, col3= st.columns(3)
     col1.metric("SVM", "Accuracy", "77%", "off")
     col1.metric("SVM", "f1_score", "77%", "off")
@@ -69,7 +69,7 @@ with tab1:
 
     st.html("<hr>")
      
-    st.write("### Modèles Réseaux de Neurones")
+    st.write("### ⭐Modèles Réseaux de Neurones")
     st.write("BERT (30% data)")
     col1, col2 = st.columns(2)
     col1.metric("BERT", "Accuracy", "79%", "normal")
@@ -135,7 +135,7 @@ with tab1:
     st.html("<hr>")
     
     
-    st.write("### Modèles ML (approche différente)")
+    st.write("### ⭐Modèles ML (approche différente)")
     st.write("Les mots ne sont pas vectorisés, mais transformés en variables descriptive avec un nombre limité à 300.\
     Cette approche n'a pas été retenue pour des questions de performance d'évaluation des ptrédictions.")
     img_approche_ml = Image.open(os.path.join(os.getcwd(), "images", "image-2.png"))
@@ -156,7 +156,7 @@ with tab2:
     st.header("Résultats obtenus")
 
      
-    st.write("### Modèles **baseline** images")
+    st.write("### ⭐Modèles **baseline** images")
     col1, col2 = st.columns(2)
     col1.metric("PCA et Random Forest", "Accuracy", "+49%", delta_color= "inverse")
     col1.metric("PCA et Random Forest", "f1_score (moy)", "+56%", delta_color= "inverse")
@@ -179,7 +179,7 @@ with tab2:
     
     st.html("<hr>")
     
-    st.write("### Modèles **DEEP-LEARNING** images")
+    st.write("### ⭐Modèles **DEEP-LEARNING** images")
     col1, col2 = st.columns(2)
     col1.metric("RESNET 50", "Accuracy", "+48%", delta_color= "inverse")
     col1.write(">Le **RESTNET 50** s'est arrêté de progresser au bout de 36 EOCHS à 48% d'accuracy")
@@ -222,7 +222,7 @@ with tab3:
     st.header("Trois approches différentes ont été adoptées :")
     
     col1, col2 = st.columns(2)
-    col1.write("1. #### **Entraîner un modèle multimodal :**")
+    col1.write("1. #### ⭐**Entraîner un modèle multimodal :**")
     col1.write(">Nous avons entraîné le **CLIP (Contrastive Language-Image pretraining) d'OPEN AI**, qui associe des paires de mots/images dans un espace \
      vectoriel et apprend à les différencier en les rapprochant ou en les éloignant. \
      Malheureusement, la durée d'entraînement étant trop longue avec des ressources trop limitées, le modèle a été arrêté au bout de 5 époques.")
@@ -233,7 +233,7 @@ with tab3:
     
     st.divider()
     col1, col2 = st.columns(2)
-    col1.write("2. #### **Entraîner un modèle de concaténation text a images :**")
+    col1.write("2. #### ⭐**Entraîner un modèle de concaténation text a images :**")
     col1.write(">**Le principe :** prendre les meilleurs modèles texte + meilleur modèle image + couche de classification")
     col1.write(">Si on compare les rapports de classification/matrice de confusion des meilleurs modèles texte/image, on se rend compte que les modèles \
      peuvent se compenser (certaines classes sont bien catégorisées par le modèle image et moins bien par celui du texte, et inversement")
@@ -244,7 +244,7 @@ with tab3:
     
     st.divider()
     col1, col2 = st.columns(2)
-    col1.write("3. #### **Entraîner un modèle hybride :**")
+    col1.write("3. ⭐### **Entraîner un modèle hybride :**")
     col1.write("On entraîne donc un modèle qui prend en entrée texte + image. \
         Le texte est passé dans la LR texte gelée et produit un vecteur de probas de 27 classes. \
         L'image est passée dans le ViT gelé et produit un vecteur de probabilités des 27 classes également. \

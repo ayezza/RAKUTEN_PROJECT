@@ -86,7 +86,7 @@ df_with_cats.index = df_with_cats.index.astype('int64')
 
 
 # Configuration des tabs
-tabs_title = ["🗃Texte & Image", "🗃Texte uniquement", "🗃Images uniquement"]
+tabs_title = ["🚀Texte & Image", "🚀Texte uniquement", "🚀Images uniquement"]
 tab0, tab1, tab2 = st.tabs(tabs_title)
 
 # TAB Analyse du texte

@@ -85,7 +85,7 @@ if df_with_cats is None:
     st.write("Ouch ! Impossible de charger le dataset à partir du PICKLE.")
 
 # Configuration de la barre latérale
-tabs_title = ["🚀Jeu de données intial", "🚀Jeu de données cible", "🗃Exploration intéractive des images"]
+tabs_title = ["🚀Jeu de données intial", "🚀Jeu de données cible", "🚀Exploration intéractive des images"]
 tab1, tab2, tab3 = st.tabs(tabs_title)
 cur_dir = os.getcwd()
 st.write(cur_dir)
