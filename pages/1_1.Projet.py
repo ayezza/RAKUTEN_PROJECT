@@ -54,6 +54,4 @@ st.html("2. <h6><strong>Analyser les datasets mis à notre disposition en tant q
 st.html("3. <h6><strong>Réaliser toute la phase de preprocessing</strong> afin de rendre le dataset cible exploitable, \
     de meilleure qualité dans l’objectif d’obtenir des résultats performants (scoring, prédiction des données de tests ou de nouvelles données, temps d’exécution…</h6>")
 st.html("4. <h6>S’agissant d’un problème de classification des produits selon leurs catégories, <strong>procéder aux expérimentations des modèles dans les grandes typologies</strong>, \
-    à savoir la classification de ML (Machine Learning), de DEEP learning (CNN, RNN etc., voire utilisation des modèles pré-entrainés comme BERT, GLOVE etc.</h6>")
-
-    
+    à savoir la classification de ML (Machine Learning), de DEEP learning (CNN, RNN etc., voire utilisation des modèles pré-entrainés comme BERT, GLOVE etc.)</h6>")

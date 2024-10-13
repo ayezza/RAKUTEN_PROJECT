@@ -36,3 +36,4 @@ st.html("<h2>Mentor<h2>\
 st.html("<h2>Equipe projet</h3>\
     <ul><li>Louis VALENTIN</li><li>Souleymane TOURE</li><li>Ouissam GOUNI</li><li>Abdel YEZZA</li></ul>")
 
+st.html('<a href="https://github.com/DataScientest-Studio/jul24_bds_rakuten" target="_blank">Espace GITHUB du projet</a>')    
