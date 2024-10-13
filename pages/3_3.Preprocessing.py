@@ -91,7 +91,7 @@ tab0, tab1, tab2 = st.tabs(tabs_title)
 
 # TAB Analyse du texte
 with tab0:
-    st.header("Exploration du texte et images")
+    st.header("⭐Exploration du texte et images")
     st.write("L'objectif de l’exercice d’exploration est de :") 
     st.write("1- Identifier dans quelle mesure le contenu de la « désignation » et de la « description » peut se rapporter à un type de produit")
     st.write("2- Quel type de nettoyage des données doit être effectué pour que les données textuelles soient les plus pertinentes ?")
@@ -99,7 +99,7 @@ with tab0:
     img_explore_txt_byprdcode = Image.open(os.path.join(os.getcwd(), "images", "explore-txt-prdcat.png"))
     st.image(img_explore_txt_byprdcode)
 
-    st.header("Conclusions")
+    st.header("⭐Conclusions")
     st.divider()
     st.write("La combinaison de la « désignation » et de la « description » semble donner de meilleurs résultats en termes d'identification des caractéristiques liées au type de produit.")
     st.divider()
@@ -133,7 +133,7 @@ with tab1:
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.html("<h4><span  style='color:orange'>Répartition des catégories selon les decriptions associées :</span></h4>")
+        st.html("<h4>⭐<span  style='color:orange'>Répartition des catégories selon les decriptions associées :</span></h4>")
         st.image(img_analyse_graphe_1)
         st.write("1.	Pour certaines catégories (parties noires) les valeurs nulles sont majoritaires, ce qui les pénalise comparativement aux autres catégories. \
                 Cela peut éventuellement avoir une conséquence dans la prédiction de ces catégories au profit des autres.")
@@ -147,13 +147,13 @@ with tab1:
 
     with col2:
         
-        st.html("<h4><span  style='color:orange'>Répartition des catégories selon les designations associées :</span></h4>")
+        st.html("<h4>⭐<span  style='color:orange'>Répartition des catégories selon les designations associées :</span></h4>")
         st.image(img_analyse_graphe_2)
         st.write("On note bien que malgré ces trois distinctions, le déséquilibre subsiste ! Il s'accentue même pour quelques catégories en bas de l’échelle, \
             comme **60, 1180, 1301, 1940 et 2220**. Autrement dit, ces catégories seront moins fournies en termes de texte.")
     
     with col3:
-        st.html("<h4><span  style='color:orange'>Répartition des catégories selon les designations associées après le cleaning :</span></h4>")
+        st.html("<h4>⭐<span  style='color:orange'>Répartition des catégories selon les designations associées après le cleaning :</span></h4>")
         st.image(img_analyse_graphe_3)
         st.html("Les actions suivantes ont été menées pour donner la nouvelle répartition des catégories ci-dessous un peu mieux équilibrée que précédemment\
             <ul><li>Suppression des valeurs nulles</li><ul>\
@@ -245,7 +245,7 @@ with tab2:
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.header("Fréquences des tailles des images (en bits)")
+        st.header("⭐Fréquences des tailles des images (en bits)")
         st.image(img_explore_images_1)
         st.write("Ce graphe exprime la fréquence des images en fonction de leur poids, une piste que \
             nous choisissons d'explorer. On observe une distribution gaussienne, la **plus grande partie des images \
@@ -253,14 +253,14 @@ with tab2:
 
 
     with col2:
-        st.header("Graphe boxplot des tailles")
+        st.header("⭐Graphe boxplot des tailles")
         st.image(img_explore_images_2)
         st.write("Ce graphe Exprime la distribution de la taille des images en fonction des catégories \
                  médiane, écarts interquartiles et outliers. **Nous remarquons que cette distribution est assez disparate, \
                 nous avons donc de bonnes raisons de penser que la taille des images influe sur la catégorie**")
 
     with col3:
-        st.header("Test ANOVA sur les tailles des images")
+        st.header("⭐Test ANOVA sur les tailles des images")
         st.image(img_explore_images_3)
         st.write("Nous réalisons un test ANOVA (qui sert à savoir si plusieurs groupes ont des \
                 différences significatives entre eux) avec les hypothèses suivantes:")
@@ -285,19 +285,19 @@ with tab2:
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.header("Preprocessing générique")
+        st.header("⭐Preprocessing générique")
         st.image(img_analyse_images_1)
         st.write("Un exemple d'images preprocessées qui pourront nous servir pour tous les modèles (pas de réduction de taille, pas \
             d'altération de la qualité, 1000 images par catégorie et transfos)")
         
     with col2:
-        st.header("Preprocess deep-learning")
+        st.header("⭐Preprocess deep-learning")
         st.image(img_analyse_images_2)
         st.write("Un exemple d'images preprocessées pour les modèles deeplearning (la library utilisée est \
             **keras**, réduction taille en 224x224 et transfos")
    
     with col3:
-        st.header("Preprocessing baseline")
+        st.header("⭐Preprocessing baseline")
         st.image(img_analyse_images_3)
         st.write("Un exemple_preprocess_baseline : un exemple d'images preprocessées pour les modèles baseline \
             (taille réduite, niveaux de gris et transfos")

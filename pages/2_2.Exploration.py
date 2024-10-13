@@ -104,7 +104,7 @@ with tab1:
     
     
     
-    st.html("<h3><span  style='color:orange'>Schéma des jeux de données d'entraînement et de test :</span></h3>")
+    st.html("<h3>⭐<span  style='color:orange'>Schéma des jeux de données d'entraînement et de test :</span></h3>")
     st.image(img_schema_dataset)
     st.html("\
         <ul><li>Deux fichiers CSV, le 1er <strong>X_train_update.csv</strong> est un le jeu de données d'entraînement et le 2ème <strong>  X_test_update.csv</strong>est celui de test </li>            \
@@ -113,7 +113,7 @@ with tab1:
         </ul>\
              ")
     
-    st.html("<h3><span  style='color:orange'>Jeu de données d'entraînement :</span></h3>")
+    st.html("<h3>⭐<span  style='color:orange'>Jeu de données d'entraînement :</span></h3>")
     st.image(image=img_train_set)
     st.write(">Les valeurs manquantes sont uniquement dans la colonne **description** de l'ordre de 35%")
     st.write(">Le taux des designations en doublon reste relativement faible 3%")
@@ -124,7 +124,7 @@ with tab1:
         à savoir, les **catégories associées aux produits**.")
      
     img_shema_target = Image.open(os.path.join(os.getcwd(), "images", "shema_target.png"))
-    st.html("<h3><span  style='color:orange'>Schéma de la variable à prédire (catégories associées aux produits) :</span></h3>")
+    st.html("<h3>⭐<span  style='color:orange'>Schéma de la variable à prédire (catégories associées aux produits) :</span></h3>")
     st.html("<p>La variable cible est formée de 27 catégories numériques. Une variable traduisant les catégories numériques \
         ci-dessous en catégories descirptives sur la base de la combinaison du texte et des images associées aux produits.</p>")
     st.image(img_shema_target)
@@ -134,18 +134,18 @@ with tab1:
     #df = get_codes_df()
     #st.dataframe(df)
     
-    st.html("<h3><span  style='color:orange'>Jeu de données cible (target) pour la partie entraînement</span></h3>")
+    st.html("<h3>⭐<span  style='color:orange'>Jeu de données cible (target) pour la partie entraînement</span></h3>")
     st.write("le jeu de données target de la partie test possède le même schéma que celui d'entraînement.")
     st.write("Dimension du jeu de données target pour le test : (16453, 1)")
     st.image(img_target_set)
     
-    st.html("<h4><span  style='color:orange'>Dataset cible</span></h4>")
+    st.html("<h4>⭐<span  style='color:orange'>Dataset cible</span></h4>")
     st.write(">#### Le CSV d'entraînement combiné avec le CSV de la cible (catégories des produits) sera notre dataset pour la modélisation")
     st.write(">#### Un CSV de test sans les catégories sera uniquement utilisé lors de tests des modèles développés")
     
 with tab2:
     img_datset_cibe = Image.open(os.path.join(os.getcwd(), "images", "datset_cibe.png"))
-    st.html("<h3><span  style='color:orange'>Schéma du jeu de données cible construit :</span></h3>")
+    st.html("<h3>⭐<span  style='color:orange'>Schéma du jeu de données cible construit :</span></h3>")
     st.image(img_datset_cibe)
     
     st.html("<span style='font-size: 20px;'>Les deux variables <span style='color:orange'>'designation'</span> et <span style='color:orange'>'description'</span> ont été concténées \
@@ -212,7 +212,7 @@ with tab3:
     
     
     with col2:
-        st.html("<h4><span  style='color:orange'>Affichage aléatoire des images par catégorie sélectionnée</span></h4>")    
+        st.html("<h4>⭐<span  style='color:orange'>Affichage aléatoire des images par catégorie sélectionnée</span></h4>")    
         st.write("Cette catégorisation est le résultat d'un travail réalisé à la fois sur des échantillons d'images et du texte.")
         list_elements = []
         for cat in np.sort(df_with_cats['catégorie'].unique()):
@@ -259,7 +259,7 @@ with tab3:
             st.pyplot(ax.figure)
     
     with col3:
-        col3.html("<h4><span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h4>")
+        col3.html("<h4>⭐<span  style='color:orange'>Echantillons d'images par code catégorie des produits</span></h4>")
         def drawBtn_2():
             btn_load_images = col3.button("Charger les échantillons",  type="primary" )
             if btn_load_images:
